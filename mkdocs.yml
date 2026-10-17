@@ -1,0 +1,24 @@
+site_name: Kubernetes for Mere Mortals
+site_description: Plain-language Kubernetes. What a cluster is, pods and deployments explained, services and config without the magic, a worked example on a local cluster, and honest advice about when you do not need any of it.
+site_url: https://paulsullivan33-dev.github.io/kubernetes-for-mere-mortals/
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Kubernetes Is: what-kubernetes-is.md
+  - The Pieces: the-pieces.md
+  - Pods: pods.md
+  - Manifests and kubectl: manifests-and-kubectl.md
+  - Deployments: deployments.md
+  - Services and Networking: services-and-networking.md
+  - ConfigMaps and Secrets: configmaps-and-secrets.md
+  - Storage: storage.md
+  - A Worked Example: worked-example.md
+  - Troubleshooting: troubleshooting.md
+  - Running It Yourself: running-it-yourself.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

@@ -1,0 +1,48 @@
+kubectl cheat sheet — the commands this guide uses
+==================================================
+
+See what is there
+  kubectl get pods                    list pods (add -A for all namespaces)
+  kubectl get deployments,services    several kinds at once (svc for short)
+  kubectl get pods -o wide            add node and pod IP columns
+  kubectl get pods -w                 watch: stream changes until Ctrl-C
+
+Understand one thing
+  kubectl describe pod <name>         details + events; read the bottom first
+  kubectl describe deployment <name>  desired vs. current replicas
+  kubectl logs <pod>                  what the container printed
+  kubectl logs <pod> --previous       logs of the crashed, replaced container
+  kubectl get events --sort-by=.lastTimestamp
+
+Change things the declarative way
+  kubectl apply -f file.yaml          create or update from a manifest
+  kubectl apply -f examples/          a whole directory of manifests
+  kubectl edit deployment <name>      open the live object in an editor
+  kubectl delete -f file.yaml         remove exactly what the file declares
+  kubectl diff -f file.yaml           show what apply *would* change
+
+Deployments and rollouts
+  kubectl scale deployment <name> --replicas=3
+  kubectl set image deployment/<name> <container>=<image>:<tag>
+  kubectl rollout status deployment/<name>
+  kubectl rollout history deployment/<name>
+  kubectl rollout undo deployment/<name>      back to the previous version
+
+Inside a pod
+  kubectl exec -it <pod> -- sh        a shell (if the image has one)
+  kubectl port-forward service/<name> 8080:80   your localhost -> the service
+
+Generate a manifest instead of writing one
+  kubectl create deployment demo --image=nginx:alpine --dry-run=client -o yaml
+  kubectl create service nodeport demo --tcp=80:80 --dry-run=client -o yaml
+  kubectl create configmap cfg --from-literal=key=value --dry-run=client -o yaml
+
+Clusters and contexts
+  kubectl config get-contexts         clusters you can talk to
+  kubectl cluster-info                prove you are connected, and to what
+  kubectl version                     client and server versions
+
+When a pod will not start, in this order
+  kubectl get pods                    which state is it stuck in?
+  kubectl describe pod <name>         the events at the bottom say why
+  kubectl logs <pod> [--previous]     what the app itself said
